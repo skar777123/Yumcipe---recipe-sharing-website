@@ -21,3 +21,13 @@ const recipeSchema = new Schema(
   { timestamps: true }
 );
 export const Recipe = mongoose.model("recipe", recipeSchema);
+
+const contact = new Schema(
+  {
+    email: String,
+    subject: String,
+    message: String,
+  },
+  { timestamps: true }
+);
+export const Contact = mongoose.model("contact", contact);

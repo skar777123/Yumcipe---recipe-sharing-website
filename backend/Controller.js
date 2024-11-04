@@ -139,3 +139,19 @@ export const updateRecipe = async (req, res) => {
     });
   }
 };
+
+export const contactUs = async (req, res) => {
+  const { subject, email, message } = req.body;
+  try {
+    const contactUs = await ContactUs.create({ subject, email, message });
+    res.status(200).json({
+      message: "Message sent successfully",
+      contactUs,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: "Error",
+      error: error.message,
+    });
+  }
+};
