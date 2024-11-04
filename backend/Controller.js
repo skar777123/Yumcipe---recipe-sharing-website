@@ -1,0 +1,141 @@
+import { User, Recipe } from "./Schema.js";
+import jwt from "jsonwebtoken";
+
+export const Register = async (req, res) => {
+  const { name, email, password } = req.body;
+  try {
+    const user = await User.create({ name, email, password });
+    res.status(200).json({
+      message: "User created successfully",
+      user: user,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: "Error",
+      error: error.message,
+    });
+  }
+};
+
+export const Login = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const user = await User.findOne({ email: email });
+    if (user.password === password) {
+      const tokenData = {
+        userId: user._id,
+      };
+      const token = jwt.sign(tokenData, process.env.JWT_SECRET);
+      res
+        .status(200)
+        .cookie("token", token, {
+          maxAge: 15 * 24 * 60 * 60 * 1000,
+          httpOnly: true,
+          sameSite: "strict",
+          secure: "development",
+        })
+        .json({
+          message: "User logged in successfully",
+          token: token,
+          user: user,
+        });
+    } else {
+      res.status(400).json({
+        message: "Invalid email or password",
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: "Error",
+      error: error.message,
+    });
+  }
+};
+
+export const createRecipe = async (req, res) => {
+  const { recipeName, instructions, ingredients, exceptions } = req.body;
+  const { userId } = req.user._id;
+  try {
+    const create = await Recipe.create({
+      recipeName,
+      instructions,
+      ingredients,
+      exceptions,
+      userId,
+    });
+    res.status(201).json({
+      message: "Recipe created successfully",
+      create,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: "Error",
+      error: error.message,
+    });
+  }
+};
+
+export const deleteRecipe = async (req, res) => {
+  const { id } = req.body;
+  try {
+    const deleteRecipe = await Recipe.findByIdAndDelete({ _id: id });
+    res.status(200).json({
+      message: "Recipe deleted successfully",
+      deleteRecipe,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: "Error",
+      error: error.message,
+    });
+  }
+};
+
+export const findRecipe = async (req, res) => {
+  try {
+    const findRecipe = await Recipe.find();
+    res.status(200).json({ findRecipe });
+  } catch (error) {
+    res.status(400).json({
+      message: "Error",
+      error: error.message,
+    });
+  }
+};
+
+export const usersRecipe = async (req, res) => {
+  const id = req.user._id;
+  try {
+    const usersRecipe = await Recipe.find({ userId: id });
+    res.status(200).json({
+      message: "Recipes found",
+      usersRecipe,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: "Error",
+      error: error.message,
+    });
+  }
+};
+
+export const updateRecipe = async (req, res) => {
+  const { id, recipeName, instructions, ingredients, exceptions } = req.body;
+  try {
+    const updateRecipe = await Recipe.findByIdAndUpdate(id, {
+      recipeName,
+      instructions,
+      ingredients,
+      exceptions,
+    });
+    res.status(200).json({
+      message: "Recipe updated successfully",
+      updateRecipe,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: "Error",
+      error: error.message,
+    });
+  }
+};
