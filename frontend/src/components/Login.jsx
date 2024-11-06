@@ -10,7 +10,7 @@ const Login = () => {
       </div>
       <div className="mb-5">
         <label
-          for="email"
+          htmlFor="email"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
           Email
@@ -27,7 +27,7 @@ const Login = () => {
       </div>
       <div className="mb-5">
         <label
-          for="password"
+          htmlFor="password"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
           Password
@@ -46,7 +46,7 @@ const Login = () => {
       <button
         type="submit"
         onClick={() => {
-          localStorage.setItem("token", "s");
+          localStorage.setItem("token", "sdadasa");
         }}
         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       >
