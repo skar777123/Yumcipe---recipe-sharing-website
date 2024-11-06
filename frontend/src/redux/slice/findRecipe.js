@@ -48,11 +48,6 @@ export const AddRecipe = createAsyncThunk("addRecipe", async (value) => {
         ingredients: value.ingredients,
         instructions: value.instructions,
         userId: localStorage.getItem("user"),
-      },
-      {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
       }
     )
     .then((res) => res.data)

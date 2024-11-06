@@ -53,8 +53,8 @@ export const Login = async (req, res) => {
 };
 
 export const createRecipe = async (req, res) => {
-  const { recipeName, instructions, ingredients, likes } = req.body;
-  const { userId } = req.user._id;
+  const { recipeName, instructions, ingredients, likes, userId } = req.body;
+
   try {
     const create = await Recipe.create({
       recipeName,
@@ -111,7 +111,7 @@ export const usersRecipe = async (req, res) => {
     res.status(200).json({
       message: "Recipes found",
       usersRecipe,
-      user
+      user,
     });
   } catch (error) {
     res.status(400).json({
