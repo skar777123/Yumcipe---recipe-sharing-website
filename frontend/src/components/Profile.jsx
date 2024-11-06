@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Cards2 from "./Cards2";
+import { useDispatch, useSelector } from "react-redux";
+import { userRecipes } from "../redux/slice/findRecipe";
 
 const Profile = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state);
+  useEffect(() => {
+    dispatch(userRecipes());
+  },[dispatch]);
   return (
     <div>
       <div className="flex flex-row justify-center">

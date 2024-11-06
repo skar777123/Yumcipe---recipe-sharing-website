@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Login as fetcher } from "../redux/slice/findRecipe";
+import Cookie from "universal-cookie";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const user = useSelector((state) => state);
+  const cookie = new Cookie();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(fetcher({ email, password }));
 
     if (user.data && user.data.data && user.data.data.token) {
-      localStorage.setItem("token", user.data.data.token); 
+      localStorage.setItem("token", user.data.data.token);
+      cookie.set("token", user.data.data.token, { path: "/" });
       window.location.href = "/";
     }
   };

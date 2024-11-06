@@ -1,13 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import Cookies from "universal-cookie";
 import axios from "axios";
+const cookie = new Cookies();
 
 export const findRecipes = createAsyncThunk("findRecipe", async () => {
   const response = await fetch("https://yumcipe.onrender.com/recipe");
   return response.json();
 });
 
-export const userRecipes = createAsyncThunk("findRecipe", async () => {
-  const response = await fetch("https://yumcipe.onrender.com/userRecipe");
+export const userRecipes = createAsyncThunk("userRecipes", async () => {
+  const response = await fetch("https://yumcipe.onrender.com/userRecipe", {
+    headers: {
+      Authorization: 'Bearer' + cookie.get("token"),
+    },
+  });
   return response.json();
 });
 
@@ -50,6 +56,17 @@ const fecthed = createSlice({
       state.data = action.payload;
     });
     builder.addCase(findRecipes.rejected, (state, action) => {
+      console.log("Error", action.payload);
+      state.isError = true;
+    });
+    builder.addCase(userRecipes.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(userRecipes.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.data = action.payload;
+    });
+    builder.addCase(userRecipes.rejected, (state, action) => {
       console.log("Error", action.payload);
       state.isError = true;
     });
