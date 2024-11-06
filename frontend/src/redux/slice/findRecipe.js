@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import Cookies from "universal-cookie";
 import axios from "axios";
-const cookie = new Cookies();
 
 export const findRecipes = createAsyncThunk("findRecipe", async () => {
   const response = await fetch("https://yumcipe.onrender.com/recipe");
@@ -11,9 +10,10 @@ export const findRecipes = createAsyncThunk("findRecipe", async () => {
 export const userRecipes = createAsyncThunk("userRecipes", async () => {
   const response = await fetch("https://yumcipe.onrender.com/userRecipe", {
     headers: {
-      Authorization: 'Bearer' + cookie.get("token"),
+      Authorization: localStorage.getItem("token"),
     },
   });
+
   return response.json();
 });
 
@@ -25,7 +25,6 @@ export const Login = createAsyncThunk("login", async (value) => {
     })
     .then((res) => res.data)
     .catch((err) => console.error(err));
-  // console.log(response);
   return response;
 });
 export const Register = createAsyncThunk("register", async (value) => {
@@ -35,6 +34,27 @@ export const Register = createAsyncThunk("register", async (value) => {
       password: value.password,
       name: value.name,
     })
+    .then((res) => res.data)
+    .catch((err) => console.error(err));
+  return response;
+});
+
+export const AddRecipe = createAsyncThunk("addRecipe", async (value) => {
+  const response = await axios
+    .post(
+      "https://yumcipe.onrender.com/createRecipe",
+      {
+        recipeName: value.name,
+        ingredients: value.ingredients,
+        instructions: value.instructions,
+        userId: localStorage.getItem("user"),
+      },
+      {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      }
+    )
     .then((res) => res.data)
     .catch((err) => console.error(err));
   return response;
@@ -89,6 +109,17 @@ const fecthed = createSlice({
       state.data = action.payload;
     });
     builder.addCase(Register.rejected, (state, action) => {
+      console.log("Error", action.payload);
+      state.isError = true;
+    });
+    builder.addCase(AddRecipe.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(AddRecipe.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.data = action.payload;
+    });
+    builder.addCase(AddRecipe.rejected, (state, action) => {
       console.log("Error", action.payload);
       state.isError = true;
     });

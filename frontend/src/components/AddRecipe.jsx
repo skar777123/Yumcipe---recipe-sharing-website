@@ -1,11 +1,22 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AddRecipe as addRecipe } from "../redux/slice/findRecipe"; 
 
 const AddRecipe = () => {
   const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState([]);
   const [instructions, setInstructions] = useState([]);
   const [preview, setPre] = useState(true);
-
+  const dispatch = useDispatch();
+  const recipes = useSelector((state) => state);
+  const handleSubmit = () => {
+    dispatch(addRecipe({ name, ingredients, instructions }));
+    if(recipes.data?.data?.message == "User created successfully"){
+      alert("Recipe added successfully");
+      window.location.href = '/profile'
+    }
+  };
+  console.log("State",recipes)
   return (
     <>
       <div className="flex flex-col items-center">
@@ -99,6 +110,7 @@ const AddRecipe = () => {
             {!preview && name && (
               <div className="flex flex-row justify-center mt-4">
                 <button
+                  onClick={handleSubmit}
                   type="button"
                   className="w-22 inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
                 >

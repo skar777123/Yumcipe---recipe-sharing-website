@@ -16,7 +16,7 @@ const recipeSchema = new Schema(
     ingredients: String,
     instructions: String,
     likes: Number,
-    userId: { type: Schema.Types.ObjectId, ref: "user" },
+    userId: String,
   },
   { timestamps: true }
 );

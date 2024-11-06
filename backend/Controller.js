@@ -53,14 +53,14 @@ export const Login = async (req, res) => {
 };
 
 export const createRecipe = async (req, res) => {
-  const { recipeName, instructions, ingredients, exceptions } = req.body;
+  const { recipeName, instructions, ingredients, likes } = req.body;
   const { userId } = req.user._id;
   try {
     const create = await Recipe.create({
       recipeName,
       instructions,
       ingredients,
-      exceptions,
+      likes,
       userId,
     });
     res.status(201).json({
