@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { findRecipes } from "./slice/Api";
+import fetched from "./slice/findRecipe.js";
 
 export const store = configureStore({
   reducer: {
-    findRecipes: findRecipes,
+    data: fetched,
   },
 });

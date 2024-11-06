@@ -107,9 +107,11 @@ export const usersRecipe = async (req, res) => {
   const id = req.user._id;
   try {
     const usersRecipe = await Recipe.find({ userId: id });
+    const user = await User.findById(id);
     res.status(200).json({
       message: "Recipes found",
       usersRecipe,
+      user
     });
   } catch (error) {
     res.status(400).json({

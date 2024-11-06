@@ -1,10 +1,25 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Login as fetcher } from "../redux/slice/findRecipe";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(fetcher({ email, password }));
+
+    if (user.data && user.data.data && user.data.data.token) {
+      localStorage.setItem("token", user.data.data.token); 
+      window.location.href = "/";
+    }
+  };
+
   return (
-    <form className="max-w-sm mx-auto">
+    <form className="max-w-sm mx-auto mt-14" onSubmit={handleSubmit}>
       <div className="flex flex-row justify-center">
         <h1 className="text-3xl font-bold ">Login</h1>
       </div>
@@ -43,15 +58,11 @@ const Login = () => {
         />
       </div>
 
-      <button
+      <input
         type="submit"
-        onClick={() => {
-          localStorage.setItem("token", "sdadasa");
-        }}
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-      >
-        Login
-      </button>
+        value="Login"
+        className="cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      />
     </form>
   );
 };

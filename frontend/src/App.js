@@ -4,24 +4,25 @@ import Navbar from "./components/Navbar.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Profile from "./components/Profile.jsx";
 import Contact from "./components/Contact.jsx";
-import Creds from "./components/Creds.jsx";
+import Register from "./components/Register.jsx";
+import Login from "./components/Login.jsx";
 
 function App() {
   return (
     <div className="App">
       <Navbar />
-      <Contact/>
+      <Contact />
       <BrowserRouter>
         <Routes>
           <Route
             exact
             path="/"
-            element={localStorage.getItem("token") ? <Home /> : <Creds />}
+            element={localStorage.getItem("token") ? <Home /> : <Login />}
           />
           <Route exact path="/addRecipe" element={<AddRecipe />} />
           <Route exact path="/profile" element={<Profile />} />
-          {/* <Route exact path="/contact" element={<Contact />} /> */}
-          <Route exact path="/creds" element={<Creds />} />{" "}
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/register" element={<Register />} />{" "}
         </Routes>
       </BrowserRouter>
     </div>
