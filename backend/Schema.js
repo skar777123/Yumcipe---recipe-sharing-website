@@ -5,7 +5,7 @@ const userSchema = new Schema(
     name: String,
     email: String,
     password: String,
-    recipes: Object,
+    recipes: Array,
   },
   { timestamps: true }
 );

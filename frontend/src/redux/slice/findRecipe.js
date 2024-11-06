@@ -27,6 +27,7 @@ export const Login = createAsyncThunk("login", async (value) => {
     .catch((err) => console.error(err));
   return response;
 });
+
 export const Register = createAsyncThunk("register", async (value) => {
   const response = await axios
     .post("https://yumcipe.onrender.com/register", {
@@ -38,6 +39,7 @@ export const Register = createAsyncThunk("register", async (value) => {
     .catch((err) => console.error(err));
   return response;
 });
+
 export const Contact = createAsyncThunk("contact", async (value) => {
   const response = await axios.post(
     "https://yumcipe.onrender.com/contact",
