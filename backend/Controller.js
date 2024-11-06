@@ -54,16 +54,15 @@ export const Login = async (req, res) => {
 
 export const createRecipe = async (req, res) => {
   const { recipeName, instructions, ingredients, likes } = req.body;
-  const { userId } = req.user._id;
-
+  const id = req.user._id;
   try {
     const create = await Recipe.create({
       recipeName,
       instructions,
       ingredients,
       likes,
-      userId,
     });
+    await User.findByIdAndUpdate(id, { $push: { recipe: create._id } });
     res.status(201).json({
       message: "Recipe created successfully",
       create,
