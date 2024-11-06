@@ -38,18 +38,29 @@ export const Register = createAsyncThunk("register", async (value) => {
     .catch((err) => console.error(err));
   return response;
 });
+export const Contact = createAsyncThunk("contact", async (value) => {
+  const response = await axios.post(
+    "https://yumcipe.onrender.com/contact",
+    value,
+    {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    }
+  );
+  return response.json();
+});
 
 export const AddRecipe = createAsyncThunk("addRecipe", async (value) => {
   const response = await axios
-    .post(
-      "https://yumcipe.onrender.com/createRecipe",
-      {
-        recipeName: value.name,
-        ingredients: value.ingredients,
-        instructions: value.instructions,
-        userId: localStorage.getItem("user"),
-      }
-    )
+    .post("https://yumcipe.onrender.com/createRecipe", {
+      recipeName: value.name,
+      ingredients: value.ingredients,
+      instructions: value.instructions,
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    })
     .then((res) => res.data)
     .catch((err) => console.error(err));
   return response;
@@ -115,6 +126,17 @@ const fecthed = createSlice({
       state.data = action.payload;
     });
     builder.addCase(AddRecipe.rejected, (state, action) => {
+      console.log("Error", action.payload);
+      state.isError = true;
+    });
+    builder.addCase(Contact.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(Contact.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.data = action.payload;
+    });
+    builder.addCase(Contact.rejected, (state, action) => {
       console.log("Error", action.payload);
       state.isError = true;
     });

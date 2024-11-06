@@ -1,6 +1,14 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AddRecipe as addRecipe } from "../redux/slice/findRecipe"; 
 
 const Contact = () => {
+  const dispatch = useDispatch();
+  const contact = useSelector((state) => state);
+
+  const handleSubmit = ()=>{
+    dispatch(addRecipe({}));
+  }
   return (
     <div>
       <div

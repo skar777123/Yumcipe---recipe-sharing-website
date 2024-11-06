@@ -107,8 +107,8 @@ export const findRecipe = async (req, res) => {
 export const usersRecipe = async (req, res) => {
   const id = req.user._id;
   try {
-    const usersRecipe = await Recipe.find({ userId: id });
     const user = await User.findById(id);
+    const usersRecipe = await Recipe.find({ _id: { $in: user.recipe } });
     res.status(200).json({
       message: "Recipes found",
       usersRecipe,

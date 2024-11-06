@@ -5,6 +5,7 @@ const userSchema = new Schema(
     name: String,
     email: String,
     password: String,
+    recipes: Object,
   },
   { timestamps: true }
 );
@@ -16,7 +17,6 @@ const recipeSchema = new Schema(
     ingredients: String,
     instructions: String,
     likes: Number,
-    userId: Schema.Types.ObjectId,
   },
   { timestamps: true }
 );
