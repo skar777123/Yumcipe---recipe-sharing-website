@@ -3,11 +3,12 @@ import { AiFillLike } from "react-icons/ai";
 
 const Cards = (props) => {
   return (
-    <div className="flex flex-row justify-center mt-10">
+    <div className="flex flex-wrap justify-center mt-10">
       {props.data.map((data, index) => {
         return (
           <div
-            className="flex flex-row justify-evenly "
+            className="flex flex-col justify-between m-4 max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+            key={index}
             style={{
               margin: "15px",
             }}

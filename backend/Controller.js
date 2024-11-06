@@ -53,7 +53,8 @@ export const Login = async (req, res) => {
 };
 
 export const createRecipe = async (req, res) => {
-  const { recipeName, instructions, ingredients, likes, userId } = req.body;
+  const { recipeName, instructions, ingredients, likes } = req.body;
+  const { userId } = req.user._id;
 
   try {
     const create = await Recipe.create({
