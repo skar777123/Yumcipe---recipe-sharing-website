@@ -162,13 +162,24 @@ export const likes = async (req, res) => {
   const id = req.user._id;
   try {
     const recipeId = req.body._id;
-    const liked = await Recipe.findByIdAndUpdate(recipeId, {
-      $push: { likes: id },
-    });
-    res.status(200).json({
-      message: "Recipe liked successfully",
-      liked,
-    });
+    const recipe = await Recipe.findById(recipeId);
+    if (recipe.likes.includes(id)) {
+      const liked = await Recipe.findByIdAndUpdate(recipeId, {
+        $pull: { likes: id },
+      });
+      res.status(200).json({
+        message: "Recipe liked successfully",
+        liked,
+      });
+    } else {
+      const liked = await Recipe.findByIdAndUpdate(recipeId, {
+        $push: { likes: id },
+      });
+      res.status(200).json({
+        message: "Recipe liked successfully",
+        liked,
+      });
+    }
   } catch (error) {
     res.status(400).json({
       message: "Error",

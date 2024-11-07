@@ -73,6 +73,20 @@ export const AddRecipe = createAsyncThunk("addRecipe", async (value) => {
   return response;
 });
 
+export const Likes = createAsyncThunk("likes", async (value) => {
+  const response = await fetch("https://yumcipe.onrender.com/likes", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: localStorage.getItem("token"),
+    },
+    body: JSON.stringify({
+      _id: value.id,
+    }),
+  });
+  return response.json();
+});
+
 const fecthed = createSlice({
   name: "data",
   initialState: {
