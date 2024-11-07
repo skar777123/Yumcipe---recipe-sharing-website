@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import Cookies from "universal-cookie";
 import axios from "axios";
 
 export const findRecipes = createAsyncThunk("findRecipe", async () => {

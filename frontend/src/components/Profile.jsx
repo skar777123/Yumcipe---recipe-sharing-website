@@ -61,7 +61,7 @@ const Profile = () => {
           </span>
         </h1>
       </div>
-      <Cards2 data={user.data?.userRecipe} />
+      <Cards2 data={user.data?.user?.recipes} />
     </div>
   );
 };
