@@ -40,28 +40,34 @@ export const Register = createAsyncThunk("register", async (value) => {
 });
 
 export const Contact = createAsyncThunk("contact", async (value) => {
-  const response = await axios.post(
-    "https://yumcipe.onrender.com/contact",
-    value,
-    {
-      headers: {
-        Authorization: localStorage.getItem("token"),
-      },
-    }
-  );
+  const response = await fetch("https://yumcipe.onrender.com/contact", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: localStorage.getItem("token"),
+    },
+    body: JSON.stringify({
+      email: value.email,
+      message: value.message,
+      subject: value.subject,
+    }),
+  });
   return response.json();
 });
 
 export const AddRecipe = createAsyncThunk("addRecipe", async (value) => {
-  const response = await axios
-    .post("https://yumcipe.onrender.com/createRecipe", {
+  const response = await fetch("https://yumcipe.onrender.com/createRecipe", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: localStorage.getItem("token"),
+    },
+    body: JSON.stringify({
       recipeName: value.name,
       ingredients: value.ingredients,
       instructions: value.instructions,
-      headers: {
-        Authorization: localStorage.getItem("token"),
-      },
-    })
+    }),
+  })
     .then((res) => res.data)
     .catch((err) => console.error(err));
   return response;

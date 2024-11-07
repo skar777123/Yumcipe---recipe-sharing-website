@@ -22,6 +22,7 @@ function App() {
           <Route exact path="/addRecipe" element={<AddRecipe />} />
           <Route exact path="/profile" element={<Profile />} />
           <Route exact path="/login" element={<Login />} />
+          <Route exact path="/contact" element={<Contact />} />
           <Route exact path="/register" element={<Register />} />{" "}
         </Routes>
       </BrowserRouter>

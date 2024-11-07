@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AddRecipe as addRecipe } from "../redux/slice/findRecipe"; 
+import { AddRecipe as addRecipe } from "../redux/slice/findRecipe";
 
 const AddRecipe = () => {
   const [name, setName] = useState("");
@@ -11,12 +11,10 @@ const AddRecipe = () => {
   const recipes = useSelector((state) => state);
   const handleSubmit = () => {
     dispatch(addRecipe({ name, ingredients, instructions }));
-    if(recipes.data?.data?.message == "User created successfully"){
-      alert("Recipe added successfully");
-      window.location.href = '/profile'
-    }
+    alert("Recipe added successfully");
+    window.location.href = "/profile";
   };
-  console.log("State",recipes)
+  console.log("State", recipes);
   return (
     <>
       <div className="flex flex-col items-center">

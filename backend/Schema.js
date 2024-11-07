@@ -38,8 +38,8 @@ const recipeSchema = new Schema(
       default: ""
     },
     likes: {
-      type: Number,
-      default: ""
+      type: Array,
+      default: []
     },
   },
   { timestamps: true }

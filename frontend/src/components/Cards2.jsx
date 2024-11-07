@@ -3,7 +3,7 @@ import { AiFillLike } from "react-icons/ai";
 
 function Cards2(props) {
   return (
-    <div className="flex flex-row justify-center mt-10">
+    <div className="flex flex-wrap justify-center mt-10">
       {props.data?.map((data, index) => {
         return (
           <div

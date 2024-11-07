@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AddRecipe as addRecipe } from "../redux/slice/findRecipe"; 
+import { Contact as ContactF } from "../redux/slice/findRecipe";
 
 const Contact = () => {
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
   const dispatch = useDispatch();
   const contact = useSelector((state) => state);
-
-  const handleSubmit = ()=>{
-    dispatch(addRecipe({}));
-  }
+  console.log("State", contact);
+  const handleSubmit = () => {
+    dispatch(ContactF({ email, subject, message }));
+    alert("Message has been sent");
+  };
   return (
     <div>
       <div
@@ -56,7 +60,7 @@ const Contact = () => {
           </svg>
           <span className="sr-only">Close menu</span>
         </button>
-        <form className="mb-6">
+        <form className="mb-6" onSubmit={handleSubmit}>
           <div className="mb-6">
             <label
               htmlFor="email"
@@ -67,6 +71,8 @@ const Contact = () => {
             <input
               type="email"
               id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="name@gmail.com"
               required
@@ -82,6 +88,8 @@ const Contact = () => {
             <input
               type="text"
               id="subject"
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Express you Motive"
               required
@@ -97,16 +105,17 @@ const Contact = () => {
             <textarea
               id="message"
               rows="4"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
               className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Your message..."
             ></textarea>
           </div>
-          <button
+          <input
             type="submit"
+            value="Send message"
             className="text-white bg-blue-700 hover:bg-blue-800 w-full focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 block"
-          >
-            Send message
-          </button>
+          />
         </form>
       </div>
     </div>

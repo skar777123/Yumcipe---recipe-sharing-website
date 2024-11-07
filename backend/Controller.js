@@ -157,3 +157,22 @@ export const contactUs = async (req, res) => {
     });
   }
 };
+
+export const likes = async (req, res) => {
+  const id = req.user._id;
+  try {
+    const recipeId = req.body._id;
+    const liked = await Recipe.findByIdAndUpdate(recipeId, {
+      $push: { likes: id },
+    });
+    res.status(200).json({
+      message: "Recipe liked successfully",
+      liked,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: "Error",
+      error: error.message,
+    });
+  }
+};

@@ -7,6 +7,7 @@ import {
   deleteRecipe,
   updateRecipe,
   contactUs,
+  likes,
 } from "./Controller.js";
 import express from "express";
 import { verifyToken } from "./middleware.js";
@@ -18,6 +19,7 @@ router.post("/createRecipe", verifyToken, createRecipe);
 router.post("/updateRecipe", verifyToken, updateRecipe);
 router.post("/delete", deleteRecipe);
 router.post("/contact", verifyToken, contactUs);
+router.post("/likes", verifyToken, likes);
 router.get("/recipe", findRecipe);
 router.get("/userRecipe", verifyToken, usersRecipe);
 
