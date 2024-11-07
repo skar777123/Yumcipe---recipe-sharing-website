@@ -6,11 +6,10 @@ import { userRecipes } from "../redux/slice/findRecipe";
 const Profile = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.data);
-  console.log("State", user);
   useEffect(() => {
     dispatch(userRecipes());
   }, [dispatch]);
-  localStorage.setItem("user",user.data?.user?._id)
+  localStorage.setItem("user", user.data?.user?._id);
   return (
     <div>
       <div className="flex flex-row justify-center">
@@ -61,7 +60,7 @@ const Profile = () => {
           </span>
         </h1>
       </div>
-      <Cards2 data={user.data?.user?.recipes} />
+      <Cards2 data={user.data?.usersRecipe} />
     </div>
   );
 };

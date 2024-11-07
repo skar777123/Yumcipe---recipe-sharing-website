@@ -63,7 +63,7 @@ export const createRecipe = async (req, res) => {
       likes,
     });
     await User.findByIdAndUpdate(
-      { _id: _id },
+      _id,
       { $push: { type: Array, recipes: create._id } }
     );
     res.status(201).json({

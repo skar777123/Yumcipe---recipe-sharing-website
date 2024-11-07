@@ -7,6 +7,7 @@ function Cards2(props) {
       {props.data?.map((data, index) => {
         return (
           <div
+            key={index}
             className="flex flex-row justify-evenly "
             style={{
               margin: "15px",
