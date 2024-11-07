@@ -110,7 +110,7 @@ export const usersRecipe = async (req, res) => {
   const id = req.user._id;
   try {
     const user = await User.findById(id);
-    const recipes = await user.recipes.map((recipes) => recipe._id);
+    const recipes = await user.recipes.map((recipes) => recipes._id);
     const usersRecipe = await Recipe.find({ _id: { $in: recipes } });
     res.status(200).json({
       message: "Recipes found",
