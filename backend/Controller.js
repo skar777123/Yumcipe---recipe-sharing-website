@@ -5,10 +5,13 @@ export const Register = async (req, res) => {
   const { name, email, password } = req.body;
   try {
     const user = await User.create({ name, email, password });
-    res.status(200).json({
-      message: "User created successfully",
-      user: user,
-    });
+    res
+      .header("Access-Control-Allow-Origin", "https://yumcipe-app.netlify.app/")
+      .status(200)
+      .json({
+        message: "User created successfully",
+        user: user,
+      });
   } catch (error) {
     res.status(400).json({
       message: "Error",
@@ -27,6 +30,10 @@ export const Login = async (req, res) => {
       };
       const token = jwt.sign(tokenData, process.env.JWT_SECRET);
       res
+        .header(
+          "Access-Control-Allow-Origin",
+          "https://yumcipe-app.netlify.app/"
+        )
         .status(200)
         .cookie("token", token, {
           maxAge: 15 * 24 * 60 * 60 * 1000,
@@ -62,10 +69,13 @@ export const createRecipe = async (req, res) => {
       ingredients,
     });
     await User.findByIdAndUpdate(_id, { $push: { recipes: create._id } });
-    res.status(201).json({
-      message: "Recipe created successfully",
-      create,
-    });
+    res
+      .header("Access-Control-Allow-Origin", "https://yumcipe-app.netlify.app/")
+      .status(201)
+      .json({
+        message: "Recipe created successfully",
+        create,
+      });
   } catch (error) {
     res.status(400).json({
       message: "Error",
@@ -78,10 +88,13 @@ export const deleteRecipe = async (req, res) => {
   const { id } = req.body;
   try {
     const deleteRecipe = await Recipe.findByIdAndDelete({ _id: id });
-    res.status(200).json({
-      message: "Recipe deleted successfully",
-      deleteRecipe,
-    });
+    res
+      .header("Access-Control-Allow-Origin", "https://yumcipe-app.netlify.app/")
+      .status(200)
+      .json({
+        message: "Recipe deleted successfully",
+        deleteRecipe,
+      });
   } catch (error) {
     res.status(400).json({
       message: "Error",
@@ -93,7 +106,10 @@ export const deleteRecipe = async (req, res) => {
 export const findRecipe = async (req, res) => {
   try {
     const findRecipe = await Recipe.find();
-    res.status(200).json({ findRecipe });
+    res
+      .header("Access-Control-Allow-Origin", "https://yumcipe-app.netlify.app/")
+      .status(200)
+      .json({ findRecipe });
   } catch (error) {
     res.status(400).json({
       message: "Error",
@@ -108,11 +124,14 @@ export const usersRecipe = async (req, res) => {
     const user = await User.findById(id);
     const recipes = await user.recipes.map((recipes) => recipes._id);
     const usersRecipe = await Recipe.find({ _id: { $in: recipes } });
-    res.status(200).json({
-      message: "Recipes found",
-      usersRecipe,
-      user,
-    });
+    res
+      .header("Access-Control-Allow-Origin", "https://yumcipe-app.netlify.app/")
+      .status(200)
+      .json({
+        message: "Recipes found",
+        usersRecipe,
+        user,
+      });
   } catch (error) {
     res.status(400).json({
       message: "Error",
@@ -130,10 +149,13 @@ export const updateRecipe = async (req, res) => {
       ingredients,
       exceptions,
     });
-    res.status(200).json({
-      message: "Recipe updated successfully",
-      updateRecipe,
-    });
+    res
+      .header("Access-Control-Allow-Origin", "https://yumcipe-app.netlify.app/")
+      .status(200)
+      .json({
+        message: "Recipe updated successfully",
+        updateRecipe,
+      });
   } catch (error) {
     res.status(400).json({
       message: "Error",
@@ -146,10 +168,13 @@ export const contactUs = async (req, res) => {
   const { subject, email, message } = req.body;
   try {
     const contactUs = await ContactUs.create({ subject, email, message });
-    res.status(200).json({
-      message: "Message sent successfully",
-      contactUs,
-    });
+    res
+      .header("Access-Control-Allow-Origin", "https://yumcipe-app.netlify.app/")
+      .status(200)
+      .json({
+        message: "Message sent successfully",
+        contactUs,
+      });
   } catch (error) {
     res.status(400).json({
       message: "Error",
@@ -167,18 +192,30 @@ export const likes = async (req, res) => {
       const liked = await Recipe.findByIdAndUpdate(recipeId, {
         $pull: { likes: id },
       });
-      res.status(200).json({
-        message: "Recipe liked successfully",
-        liked,
-      });
+      res
+        .header(
+          "Access-Control-Allow-Origin",
+          "https://yumcipe-app.netlify.app/"
+        )
+        .status(200)
+        .json({
+          message: "Recipe disliked successfully",
+          liked,
+        });
     } else {
       const liked = await Recipe.findByIdAndUpdate(recipeId, {
         $push: { likes: id },
       });
-      res.status(200).json({
-        message: "Recipe liked successfully",
-        liked,
-      });
+      res
+        .header(
+          "Access-Control-Allow-Origin",
+          "https://yumcipe-app.netlify.app/"
+        )
+        .status(200)
+        .json({
+          message: "Recipe liked successfully",
+          liked,
+        });
     }
   } catch (error) {
     res.status(400).json({
