@@ -9,7 +9,7 @@ function Home() {
   useEffect(() => {
     dispatch(findRecipes());
   }, [dispatch]); 
-
+  
   return (
     <div className="App">
       <div>
@@ -29,7 +29,7 @@ function Home() {
           recipes.data ? ( 
             <Cards data={recipes.data.findRecipe} /> 
           ) : (
-            <p>Loading recipes...</p> 
+            <p className="flex flex-row justify-center mt-10 text-blue-400 font-extrabold">Loading recipes...</p> 
           )
         }
       </div>

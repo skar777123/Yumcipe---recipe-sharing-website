@@ -81,11 +81,31 @@ export const Likes = createAsyncThunk("likes", async (value) => {
       Authorization: localStorage.getItem("token"),
     },
     body: JSON.stringify({
-      _id: value.id,
+      _id: value.data._id,
     }),
   });
   return response.json();
 });
+
+export const Update = createAsyncThunk("update", async (value) => {
+  const response = await fetch("https://yumcipe.onrender.com/updateRecipe", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: localStorage.getItem("token"),
+    },
+    body: JSON.stringify({
+      _id: value._id,
+      recipeName: value.recipeName,
+      ingredients: value.ingredients,
+      instructions: value.instructions,
+    }),
+  })
+    .then((res) => res.data)
+    .catch((err) => console.error(err));
+  return response;
+});
+
 
 const fecthed = createSlice({
   name: "data",
@@ -161,7 +181,10 @@ const fecthed = createSlice({
       console.log("Error", action.payload);
       state.isError = true;
     });
+    
   },
 });
+
+
 
 export default fecthed.reducer;
