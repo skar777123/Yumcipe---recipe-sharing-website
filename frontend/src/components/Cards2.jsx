@@ -31,7 +31,12 @@ function Cards2(props) {
               .post(
                 "https://yumcipe.onrender.com/delete",
                 { id: data._id },
-                { headers: { Authorization: localStorage.getItem("token") } }
+                {
+                  headers: {
+                    Authorization: localStorage.getItem("token"),
+                    "Access-Control-Allow-Origin": "*",
+                  },
+                }
               )
               .then((response) => {
                 window.location.reload();

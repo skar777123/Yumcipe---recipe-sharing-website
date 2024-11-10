@@ -2,7 +2,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const findRecipes = createAsyncThunk("findRecipe", async () => {
-  const response = await fetch("https://yumcipe.onrender.com/recipe");
+  const response = await fetch("https://yumcipe.onrender.com/recipe", {
+    method: "GET",
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
   return response.json();
 });
 
@@ -10,6 +15,7 @@ export const userRecipes = createAsyncThunk("userRecipes", async () => {
   const response = await fetch("https://yumcipe.onrender.com/userRecipe", {
     headers: {
       Authorization: localStorage.getItem("token"),
+      "Access-Control-Allow-Origin": "*",
     },
   });
 
@@ -18,10 +24,18 @@ export const userRecipes = createAsyncThunk("userRecipes", async () => {
 
 export const Login = createAsyncThunk("login", async (value) => {
   const response = await axios
-    .post("https://yumcipe.onrender.com/login", {
-      email: value.email,
-      password: value.password,
-    })
+    .post(
+      "https://yumcipe.onrender.com/login",
+      {
+        email: value.email,
+        password: value.password,
+      },
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      }
+    )
     .then((res) => res.data)
     .catch((err) => console.error(err));
   return response;
@@ -29,11 +43,19 @@ export const Login = createAsyncThunk("login", async (value) => {
 
 export const Register = createAsyncThunk("register", async (value) => {
   const response = await axios
-    .post("https://yumcipe.onrender.com/register", {
-      email: value.email,
-      password: value.password,
-      name: value.name,
-    })
+    .post(
+      "https://yumcipe.onrender.com/register",
+      {
+        email: value.email,
+        password: value.password,
+        name: value.name,
+      },
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      }
+    )
     .then((res) => res.data)
     .catch((err) => console.error(err));
   return response;
@@ -45,6 +67,7 @@ export const Contact = createAsyncThunk("contact", async (value) => {
     headers: {
       "Content-Type": "application/json",
       Authorization: localStorage.getItem("token"),
+      "Access-Control-Allow-Origin": "*",
     },
     body: JSON.stringify({
       email: value.email,
@@ -61,6 +84,7 @@ export const AddRecipe = createAsyncThunk("addRecipe", async (value) => {
     headers: {
       "Content-Type": "application/json",
       Authorization: localStorage.getItem("token"),
+      "Access-Control-Allow-Origin": "*",
     },
     body: JSON.stringify({
       recipeName: value.name,
@@ -79,6 +103,7 @@ export const Likes = createAsyncThunk("likes", async (value) => {
     headers: {
       "Content-Type": "application/json",
       Authorization: localStorage.getItem("token"),
+      "Access-Control-Allow-Origin": "*",
     },
     body: JSON.stringify({
       _id: value.data._id,
@@ -93,6 +118,7 @@ export const Update = createAsyncThunk("update", async (value) => {
     headers: {
       "Content-Type": "application/json",
       Authorization: localStorage.getItem("token"),
+      "Access-Control-Allow-Origin": "*",
     },
     body: JSON.stringify({
       _id: value._id,
@@ -105,7 +131,6 @@ export const Update = createAsyncThunk("update", async (value) => {
     .catch((err) => console.error(err));
   return response;
 });
-
 
 const fecthed = createSlice({
   name: "data",
@@ -181,10 +206,7 @@ const fecthed = createSlice({
       console.log("Error", action.payload);
       state.isError = true;
     });
-    
   },
 });
-
-
 
 export default fecthed.reducer;

@@ -16,6 +16,7 @@ const Cards = (props) => {
               {
                 headers: {
                   Authorization: localStorage.getItem("token"),
+                  "Access-Control-Allow-Origin": "*",
                 },
               }
             )

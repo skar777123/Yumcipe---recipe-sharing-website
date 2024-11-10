@@ -12,7 +12,9 @@ dotenv.config();
 app.use(
   cors({
     origin: ["https://yumcipe-app.netlify.app/", "http://localhost:3000"],
+    methods: ["GET", "POST", "DELETE"],
     credentials: true,
+    origin: true,
   })
 );
 
