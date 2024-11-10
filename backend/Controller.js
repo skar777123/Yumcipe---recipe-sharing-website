@@ -6,7 +6,10 @@ export const Register = async (req, res) => {
   try {
     const user = await User.create({ name, email, password });
     res
-      .header("Access-Control-Allow-Origin", "https://yumcipe-app.netlify.app/")
+      .header(
+        "Access-Control-Allow-Origin",
+        "https://recipe-git-main-skars-projects-d46b4679.vercel.app/"
+      )
       .status(200)
       .json({
         message: "User created successfully",
@@ -32,7 +35,7 @@ export const Login = async (req, res) => {
       res
         .header(
           "Access-Control-Allow-Origin",
-          "https://yumcipe-app.netlify.app/"
+          "https://recipe-git-main-skars-projects-d46b4679.vercel.app/"
         )
         .status(200)
         .cookie("token", token, {
@@ -70,7 +73,10 @@ export const createRecipe = async (req, res) => {
     });
     await User.findByIdAndUpdate(_id, { $push: { recipes: create._id } });
     res
-      .header("Access-Control-Allow-Origin", "https://yumcipe-app.netlify.app/")
+      .header(
+        "Access-Control-Allow-Origin",
+        "https://recipe-git-main-skars-projects-d46b4679.vercel.app/"
+      )
       .status(201)
       .json({
         message: "Recipe created successfully",
@@ -89,7 +95,10 @@ export const deleteRecipe = async (req, res) => {
   try {
     const deleteRecipe = await Recipe.findByIdAndDelete({ _id: id });
     res
-      .header("Access-Control-Allow-Origin", "https://yumcipe-app.netlify.app/")
+      .header(
+        "Access-Control-Allow-Origin",
+        "https://recipe-git-main-skars-projects-d46b4679.vercel.app/"
+      )
       .status(200)
       .json({
         message: "Recipe deleted successfully",
@@ -107,7 +116,10 @@ export const findRecipe = async (req, res) => {
   try {
     const findRecipe = await Recipe.find();
     res
-      .header("Access-Control-Allow-Origin", "https://yumcipe-app.netlify.app/")
+      .header(
+        "Access-Control-Allow-Origin",
+        "https://recipe-git-main-skars-projects-d46b4679.vercel.app/"
+      )
       .status(200)
       .json({ findRecipe });
   } catch (error) {
@@ -125,7 +137,10 @@ export const usersRecipe = async (req, res) => {
     const recipes = await user.recipes.map((recipes) => recipes._id);
     const usersRecipe = await Recipe.find({ _id: { $in: recipes } });
     res
-      .header("Access-Control-Allow-Origin", "https://yumcipe-app.netlify.app/")
+      .header(
+        "Access-Control-Allow-Origin",
+        "https://recipe-git-main-skars-projects-d46b4679.vercel.app/"
+      )
       .status(200)
       .json({
         message: "Recipes found",
@@ -150,7 +165,10 @@ export const updateRecipe = async (req, res) => {
       exceptions,
     });
     res
-      .header("Access-Control-Allow-Origin", "https://yumcipe-app.netlify.app/")
+      .header(
+        "Access-Control-Allow-Origin",
+        "https://recipe-git-main-skars-projects-d46b4679.vercel.app/"
+      )
       .status(200)
       .json({
         message: "Recipe updated successfully",
@@ -169,7 +187,10 @@ export const contactUs = async (req, res) => {
   try {
     const contactUs = await ContactUs.create({ subject, email, message });
     res
-      .header("Access-Control-Allow-Origin", "https://yumcipe-app.netlify.app/")
+      .header(
+        "Access-Control-Allow-Origin",
+        "https://recipe-git-main-skars-projects-d46b4679.vercel.app/"
+      )
       .status(200)
       .json({
         message: "Message sent successfully",
@@ -195,7 +216,7 @@ export const likes = async (req, res) => {
       res
         .header(
           "Access-Control-Allow-Origin",
-          "https://yumcipe-app.netlify.app/"
+          "https://recipe-git-main-skars-projects-d46b4679.vercel.app/"
         )
         .status(200)
         .json({
@@ -209,7 +230,7 @@ export const likes = async (req, res) => {
       res
         .header(
           "Access-Control-Allow-Origin",
-          "https://yumcipe-app.netlify.app/"
+          "https://recipe-git-main-skars-projects-d46b4679.vercel.app/"
         )
         .status(200)
         .json({
