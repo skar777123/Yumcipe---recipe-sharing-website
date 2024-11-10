@@ -9,7 +9,7 @@ const Cards = (props) => {
         const handleSubmit = () => {
           axios
             .post(
-              "/likes",
+              "https://yumcipe.onrender.com/likes",
               {
                 _id: data._id,
               },

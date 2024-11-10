@@ -29,7 +29,7 @@ function Cards2(props) {
           const deleteRecipe = async (e) => {
             await axios
               .post(
-                "/delete",
+                "https://yumcipe.onrender.com/delete",
                 { id: data._id },
                 {
                   headers: {
