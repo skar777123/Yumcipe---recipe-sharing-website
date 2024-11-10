@@ -5,7 +5,7 @@ export const findRecipes = createAsyncThunk("findRecipe", async () => {
   const response = await fetch("https://yumcipe.onrender.com/recipe", {
     method: "GET",
     headers: {
-      "Access-Control-Allow-Origin": "https://yumcipe.onrender.com",
+      "Access-Control-Allow-Origin": "*",
     },
   });
   return response.json();
@@ -15,7 +15,7 @@ export const userRecipes = createAsyncThunk("userRecipes", async () => {
   const response = await fetch("https://yumcipe.onrender.com/userRecipe", {
     headers: {
       Authorization: localStorage.getItem("token"),
-      "Access-Control-Allow-Origin": "https://yumcipe.onrender.com",
+      "Access-Control-Allow-Origin": "*",
     },
   });
 
@@ -32,7 +32,7 @@ export const Login = createAsyncThunk("login", async (value) => {
       },
       {
         headers: {
-          "Access-Control-Allow-Origin": "https://yumcipe.onrender.com",
+          "Access-Control-Allow-Origin": "*",
         },
       }
     )
@@ -52,7 +52,7 @@ export const Register = createAsyncThunk("register", async (value) => {
       },
       {
         headers: {
-          "Access-Control-Allow-Origin": "https://yumcipe.onrender.com",
+          "Access-Control-Allow-Origin": "*",
         },
       }
     )
@@ -67,7 +67,7 @@ export const Contact = createAsyncThunk("contact", async (value) => {
     headers: {
       "Content-Type": "application/json",
       Authorization: localStorage.getItem("token"),
-      "Access-Control-Allow-Origin": "https://yumcipe.onrender.com",
+      "Access-Control-Allow-Origin": "*",
     },
     body: JSON.stringify({
       email: value.email,
