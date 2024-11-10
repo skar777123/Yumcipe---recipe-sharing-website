@@ -115,7 +115,7 @@ export const Update = createAsyncThunk("update", async (value) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: localStorage.getItem("token"),
+      Authorization: localStorage.getItem("token")
     },
     body: JSON.stringify({
       _id: value._id,
