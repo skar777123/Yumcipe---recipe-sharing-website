@@ -8,7 +8,7 @@ export const Register = async (req, res) => {
     res
       .header(
         "Access-Control-Allow-Origin",
-        "https://recipe-git-main-skars-projects-d46b4679.vercel.app/"
+        "https://recipe-l5w55oxpa-skars-projects-d46b4679.vercel.app/"
       )
       .status(200)
       .json({
@@ -35,7 +35,7 @@ export const Login = async (req, res) => {
       res
         .header(
           "Access-Control-Allow-Origin",
-          "https://recipe-git-main-skars-projects-d46b4679.vercel.app/"
+          "https://recipe-l5w55oxpa-skars-projects-d46b4679.vercel.app/"
         )
         .status(200)
         .cookie("token", token, {
@@ -75,7 +75,7 @@ export const createRecipe = async (req, res) => {
     res
       .header(
         "Access-Control-Allow-Origin",
-        "https://recipe-git-main-skars-projects-d46b4679.vercel.app/"
+        "https://recipe-l5w55oxpa-skars-projects-d46b4679.vercel.app/"
       )
       .status(201)
       .json({
@@ -97,7 +97,7 @@ export const deleteRecipe = async (req, res) => {
     res
       .header(
         "Access-Control-Allow-Origin",
-        "https://recipe-git-main-skars-projects-d46b4679.vercel.app/"
+        "https://recipe-l5w55oxpa-skars-projects-d46b4679.vercel.app/"
       )
       .status(200)
       .json({
@@ -118,7 +118,7 @@ export const findRecipe = async (req, res) => {
     res
       .header(
         "Access-Control-Allow-Origin",
-        "https://recipe-git-main-skars-projects-d46b4679.vercel.app/"
+        "https://recipe-l5w55oxpa-skars-projects-d46b4679.vercel.app/"
       )
       .status(200)
       .json({ findRecipe });
@@ -139,7 +139,7 @@ export const usersRecipe = async (req, res) => {
     res
       .header(
         "Access-Control-Allow-Origin",
-        "https://recipe-git-main-skars-projects-d46b4679.vercel.app/"
+        "https://recipe-l5w55oxpa-skars-projects-d46b4679.vercel.app/"
       )
       .status(200)
       .json({
@@ -167,7 +167,7 @@ export const updateRecipe = async (req, res) => {
     res
       .header(
         "Access-Control-Allow-Origin",
-        "https://recipe-git-main-skars-projects-d46b4679.vercel.app/"
+        "https://recipe-l5w55oxpa-skars-projects-d46b4679.vercel.app/"
       )
       .status(200)
       .json({
@@ -189,7 +189,7 @@ export const contactUs = async (req, res) => {
     res
       .header(
         "Access-Control-Allow-Origin",
-        "https://recipe-git-main-skars-projects-d46b4679.vercel.app/"
+        "https://recipe-l5w55oxpa-skars-projects-d46b4679.vercel.app/"
       )
       .status(200)
       .json({
@@ -216,7 +216,7 @@ export const likes = async (req, res) => {
       res
         .header(
           "Access-Control-Allow-Origin",
-          "https://recipe-git-main-skars-projects-d46b4679.vercel.app/"
+          "https://recipe-l5w55oxpa-skars-projects-d46b4679.vercel.app/"
         )
         .status(200)
         .json({
@@ -230,7 +230,7 @@ export const likes = async (req, res) => {
       res
         .header(
           "Access-Control-Allow-Origin",
-          "https://recipe-git-main-skars-projects-d46b4679.vercel.app/"
+          "https://recipe-l5w55oxpa-skars-projects-d46b4679.vercel.app/"
         )
         .status(200)
         .json({
