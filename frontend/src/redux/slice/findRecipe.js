@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const findRecipes = createAsyncThunk("findRecipe", async () => {
-  const response = await fetch("/recipe", {
+  const response = await fetch("https://yumcipe.onrender.com/recipe", {
     method: "GET",
     headers: {
       "Access-Control-Allow-Origin": "*",
@@ -12,7 +12,7 @@ export const findRecipes = createAsyncThunk("findRecipe", async () => {
 });
 
 export const userRecipes = createAsyncThunk("userRecipes", async () => {
-  const response = await fetch("/userRecipe", {
+  const response = await fetch("https://yumcipe.onrender.com/userRecipe", {
     headers: {
       Authorization: localStorage.getItem("token"),
       "Access-Control-Allow-Origin": "*",
@@ -25,7 +25,7 @@ export const userRecipes = createAsyncThunk("userRecipes", async () => {
 export const Login = createAsyncThunk("login", async (value) => {
   const response = await axios
     .post(
-      "/login",
+      "https://yumcipe.onrender.com/login",
       {
         email: value.email,
         password: value.password,
@@ -44,7 +44,7 @@ export const Login = createAsyncThunk("login", async (value) => {
 export const Register = createAsyncThunk("register", async (value) => {
   const response = await axios
     .post(
-      "/register",
+      "https://yumcipe.onrender.com/register",
       {
         email: value.email,
         password: value.password,
@@ -62,7 +62,7 @@ export const Register = createAsyncThunk("register", async (value) => {
 });
 
 export const Contact = createAsyncThunk("contact", async (value) => {
-  const response = await fetch("/contact", {
+  const response = await fetch("https://yumcipe.onrender.com/contact", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -79,7 +79,7 @@ export const Contact = createAsyncThunk("contact", async (value) => {
 });
 
 export const AddRecipe = createAsyncThunk("addRecipe", async (value) => {
-  const response = await fetch("/createRecipe", {
+  const response = await fetch("https://yumcipe.onrender.com/createRecipe", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -98,7 +98,7 @@ export const AddRecipe = createAsyncThunk("addRecipe", async (value) => {
 });
 
 export const Likes = createAsyncThunk("likes", async (value) => {
-  const response = await fetch("/likes", {
+  const response = await fetch("https://yumcipe.onrender.com/likes", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -113,7 +113,7 @@ export const Likes = createAsyncThunk("likes", async (value) => {
 });
 
 export const Update = createAsyncThunk("update", async (value) => {
-  const response = await fetch("/updateRecipe", {
+  const response = await fetch("https://yumcipe.onrender.com/updateRecipe", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
